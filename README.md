@@ -2,10 +2,6 @@
 
 ## Resources
 
-## Module-35:
-### Stater Repository: 
-[University Management Core Service Starter](https://github.com/Apollo-Level2-Web-Dev/university-management-core-service-starter)
-
 ### ER Diagram
 <img src="https://i.ibb.co/Ln2FttV/university-management-core-service-module-1.png" alt="ER Diagram"> </img>
 
@@ -22,5 +18,4 @@
 <img src="https://i.ibb.co/VgG8RcZ/university-management-core-service-Page-1-drawio.png" alt="https://i.ibb.co/VgG8RcZ/university-management-core-service-Page-1-drawio.png"> </img>
 
 
-- [API Documentation](https://documenter.getpostman.com/view/26694209/2s9Xy5NrFU)
 
