@@ -14,4 +14,8 @@
 ## Module-38
 <img src="https://i.ibb.co/B2JhHD3/module-38.png" alt="ER Diagram"> </img>
 
+## Module-39
+<img src="https://i.ibb.co/VgG8RcZ/university-management-core-service-Page-1-drawio.png" alt="https://i.ibb.co/VgG8RcZ/university-management-core-service-Page-1-drawio.png"> </img>
+
+
 
