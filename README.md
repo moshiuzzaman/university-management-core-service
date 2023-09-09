@@ -1,5 +1,7 @@
 # University Management Core Service
 
+## Resources
+
 ### ER Diagram
 - [Module 35: ER Diagram](https://i.ibb.co/Ln2FttV/university-management-core-service-module-1.png)
 
@@ -15,3 +17,4 @@
 
 - [Module-42: ER Diagram](https://i.ibb.co/Jc846YL/module-42-drawio.png)
 
+- [Module-43: ER Diagram](https://i.ibb.co/H4DDVRw/module-43-drawio.png)
