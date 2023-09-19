@@ -7,10 +7,12 @@ import { IPaginationOptions } from '../../../interfaces/pagination';
 import prisma from '../../../shared/prisma';
 import { RedisClient } from '../../../shared/redis';
 import {
-    EVENT_ACADEMIC_DEPARTMENT_CREATED,
-    academicDepartmentRelationalFields,
-    academicDepartmentRelationalFieldsMapper,
-    academicDepartmentSearchableFields,
+  EVENT_ACADEMIC_DEPARTMENT_CREATED,
+  EVENT_ACADEMIC_DEPARTMENT_DELETED,
+  EVENT_ACADEMIC_DEPARTMENT_UPDATED,
+  academicDepartmentRelationalFields,
+  academicDepartmentRelationalFieldsMapper,
+  academicDepartmentSearchableFields,
 } from './academicDepartment.contants';
 import { IAcademicDepartmentFilterRequest } from './academicDepartment.interface';
 
@@ -26,6 +28,7 @@ const insertIntoDB = async (
   if (isExist) {
     throw new ApiError(httpStatus.CONFLICT, 'Department already exist');
   }
+
   const result = await prisma.academicDepartment.create({
     data,
     include: {
@@ -131,6 +134,21 @@ const updateOneInDB = async (
   id: string,
   payload: Partial<AcademicDepartment>
 ): Promise<AcademicDepartment> => {
+  // check if department already exist
+  if (payload.title && payload.academicFacultyId) {
+    const isExist = await prisma.academicDepartment.findFirst({
+      where: {
+        title: payload.title,
+        academicFacultyId: payload.academicFacultyId,
+      },
+    });
+    if (isExist) {
+      throw new ApiError(httpStatus.CONFLICT, 'Department already exist');
+    }
+  }
+
+  // check if title is changed but academicFacultyId is not changed
+
   const result = await prisma.academicDepartment.update({
     where: {
       id,
@@ -140,6 +158,13 @@ const updateOneInDB = async (
       academicFaculty: true,
     },
   });
+
+  if (result) {
+    await RedisClient.publish(
+      EVENT_ACADEMIC_DEPARTMENT_UPDATED,
+      JSON.stringify(result)
+    );
+  }
   return result;
 };
 
@@ -152,6 +177,13 @@ const deleteByIdFromDB = async (id: string): Promise<AcademicDepartment> => {
       academicFaculty: true,
     },
   });
+  
+  if (result) {
+    await RedisClient.publish(
+      EVENT_ACADEMIC_DEPARTMENT_DELETED,
+      JSON.stringify(result.id)
+    );
+  }
   return result;
 };
 
