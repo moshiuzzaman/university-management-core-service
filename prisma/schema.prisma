@@ -116,7 +116,7 @@ model Faculty {
 
 model Building {
   id        String   @id @default(uuid())
-  title     String
+  title     String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   rooms     Room[]
@@ -126,7 +126,7 @@ model Building {
 
 model Room {
   id                          String                       @id @default(uuid())
-  roomNumber                  String
+  roomNumber                  String 
   floor                       String
   createdAt                   DateTime                     @default(now())
   updatedAt                   DateTime                     @updatedAt
