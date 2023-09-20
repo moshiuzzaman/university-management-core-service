@@ -10,6 +10,7 @@ router.get('/', AcademicSemeterController.getAllFromDB)
 router.get('/:id', AcademicSemeterController.getDataById)
 router.post(
     '/',
+    auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN),
     validateRequest(AcademicSemesterValidation.create),
     AcademicSemeterController.insertIntoDB
 )
