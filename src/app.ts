@@ -25,11 +25,11 @@ app.use(globalErrorHandler);
 app.use((req: Request, res: Response, next: NextFunction) => {
   res.status(httpStatus.NOT_FOUND).json({
     success: false,
-    message: 'Not Found',
+    message: 'API Not Found in core service',
     errorMessages: [
       {
         path: req.originalUrl,
-        message: 'API Not Found in core service!!',
+        message: 'API Not Found',
       },
     ],
   });
